@@ -5,7 +5,7 @@ function App() {
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(false);
   const [laps, setLaps] = useState([]);
-  const [lapStartTime, setLapStartTime] = useState(0);
+  const [lapStartTime, setLapStartTime] = useState(time);
 
   const reset = () => {
     setTime(0);
@@ -15,10 +15,6 @@ function App() {
 
   const start = () => {
     setRunning(true);
-    if (laps.length === 0) {
-      // Record the start time of the first lap
-      setLapStartTime(time);
-    }
   };
 
   const stop = () => {
@@ -27,10 +23,8 @@ function App() {
 
   const lap = () => {
     if (running) {
-      // Calculate the lap time and add it to the list of laps
-      const lapTime = time - lapStartTime;
+      const lapTime = time ;
       setLaps([...laps, lapTime]);
-      // Update lap start time for the next lap
       setLapStartTime(time);
     }
   };
@@ -53,14 +47,11 @@ function App() {
     const milliseconds = time % 1000;
     const seconds = Math.floor((time / 1000) % 60);
     const minutes = Math.floor((time / (1000 * 60)) % 60);
-    const hours = Math.floor(time / (1000 * 60 * 60));
 
     const formatNumber = (num) => (num < 10 ? `0${num}` : num);
 
     return (
       <>
-        <span id="hrs">{formatNumber(hours)}</span>
-        <span>:</span>
         <span id="min">{formatNumber(minutes)}</span>
         <span>:</span>
         <span id="sec">{formatNumber(seconds)}</span>
@@ -75,11 +66,10 @@ function App() {
     const milliseconds = time % 1000;
     const seconds = Math.floor((time / 1000) % 60);
     const minutes = Math.floor((time / (1000 * 60)) % 60);
-    const hours = Math.floor(time / (1000 * 60 * 60));
-
+    
     const formatNumber = (num) => (num < 10 ? `0${num}` : num);
 
-    return `${formatNumber(hours)}:${formatNumber(minutes)}:${formatNumber(
+    return `${formatNumber(minutes)}:${formatNumber(
       seconds
     )}:${milliseconds < 10 ? "0" + milliseconds : milliseconds}`;
   };
@@ -87,6 +77,7 @@ function App() {
   return (
     <>
       <div className="container">
+    <h1>Digital Stopwatch</h1>
         <div className="clock">{formatTime(time)}</div>
         <div className="buttons">
           <div className="left">

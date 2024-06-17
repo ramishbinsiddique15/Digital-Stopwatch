@@ -20,4 +20,7 @@ This is a simple digital stopwatch implemented in React.js. It provides function
 4. Customize styles and functionality as needed.
 
 
+## Contact
+For any inquiries or feedback, you can reach out to me at [ramishbinsiddique24@gmail.com]
+
 
